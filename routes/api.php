@@ -13,4 +13,5 @@ Route::post('category', Category\StoreController::class)->name('category.store')
 Route::get('category', Category\IndexController::class)->name('category.index');
 Route::get('category/{category}', Category\EditController::class)->name('category.edit');
 Route::put('category/{category}', Category\UpdateController::class)->name('category.update');
+Route::delete('category/{category}', Category\DestroyController::class)->name('category.destroy');
 // endregion
