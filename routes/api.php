@@ -19,4 +19,5 @@ Route::delete('category/{category}', Category\DestroyController::class)->name('c
 
 // region Product
 Route::post('product', Product\StoreController::class)->name('product.store');
+Route::get('product', Product\IndexController::class)->name('product.index');
 // endregion
