@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Product;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\postJson;
@@ -128,4 +129,30 @@ describe('validation rules', function () {
                 'category_id' => 'The selected category id is invalid.'
             ]);
     });
+});
+
+it('after creating whe should return a status 201 with the created product', function () {
+    $request = postJson(route('product.store'), [
+        'name' => 'Product Test',
+        'description' => 'Product Test Description',
+        'price' => '123.45',
+        'category_id' => $this->category->id,
+    ])->assertCreated();
+
+    /** @var Product $product */
+    $product = Product::query()->latest()->first();
+
+    $request->assertJson([
+        'data' => [
+            'name' => $product->name,
+            'description' => $product->description,
+            'price' => $product->price,
+            'category' => [
+                'id' => $product->category->id,
+                'name' => $product->category->name
+            ],
+            'created_at' => $product->created_at->format('Y-m-d h:i:s'),
+            'updated_at' => $product->updated_at->format('Y-m-d h:i:s'),
+        ],
+    ]);
 });
