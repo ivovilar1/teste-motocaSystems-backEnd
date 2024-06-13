@@ -2,12 +2,16 @@
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\postJson;
 
 beforeEach(function () {
    $this->category = Category::factory()->create();
+    $user = User::factory()->create();
+    actingAs($user);
 });
 
 it('should be able to create a product', function () {

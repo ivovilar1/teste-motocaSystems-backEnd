@@ -1,9 +1,16 @@
 <?php
 
 use App\Models\Category;
+use App\Models\User;
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\postJson;
+
+beforeEach(function () {
+    $user = User::factory()->create();
+    actingAs($user);
+});
 
 it('should be able to store a new category', function () {
     assertDatabaseCount('categories', 0);

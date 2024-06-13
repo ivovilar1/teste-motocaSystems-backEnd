@@ -1,8 +1,14 @@
 <?php
 
 use App\Models\Category;
+use App\Models\User;
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\getJson;
 
+beforeEach(function () {
+    $user = User::factory()->create();
+    actingAs($user);
+});
 it('should be able to list categories', function () {
     $category = Category::factory()->create();
 

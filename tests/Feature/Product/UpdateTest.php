@@ -1,11 +1,15 @@
 <?php
 
 use App\Models\Product;
+use App\Models\User;
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\putJson;
 
 beforeEach(function () {
    $this->product = Product::factory()->create();
+    $user = User::factory()->create();
+    actingAs($user);
 });
 
 it('should be able to update a product', function () {
