@@ -52,3 +52,19 @@ describe('validation rules', function () {
             ]);
     });
 });
+
+test('after update we should return a status 200 with the updated category', function () {
+
+    $request = putJson(route('category.update', $this->category), [
+        'name' => 'Category updated',
+    ])->assertOk();
+
+    $request->assertJson([
+        'data' => [
+            'id'         => $this->category->id,
+            'category'   => 'Category updated',
+            'created_at' => $this->category->created_at->format('Y-m-d h:i:s'),
+            'updated_at' => $this->category->updated_at->format('Y-m-d h:i:s'),
+        ],
+    ]);
+});
