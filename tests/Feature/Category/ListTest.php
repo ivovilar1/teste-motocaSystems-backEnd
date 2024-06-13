@@ -20,7 +20,7 @@ it('should be able to list categories', function () {
 it('should be able to list specific category', function () {
     $category = Category::factory()->create();
 
-    $request = getJson(route('category.edit', $category->id))
+    $request = getJson(route('category.edit', $category))
         ->assertOk();
 
     $request->assertJsonFragment([
