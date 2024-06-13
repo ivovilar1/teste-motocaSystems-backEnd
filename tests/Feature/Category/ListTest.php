@@ -1,0 +1,18 @@
+<?php
+
+use App\Models\Category;
+use function Pest\Laravel\getJson;
+
+it('should be able to list categories', function () {
+    $category = Category::factory()->create();
+
+    $request = getJson(route('category.index'))
+        ->assertOk();
+
+    $request->assertJsonFragment([
+        'id'         => $category->id,
+        'category'   => $category->name,
+        'created_at' => $category->created_at->format('Y-m-d h:i:s'),
+        'updated_at' => $category->updated_at->format('Y-m-d h:i:s'),
+    ]);
+});

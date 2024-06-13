@@ -8,5 +8,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
+// region Category
 Route::post('category', Category\StoreController::class)->name('category.store');
+Route::get('category', Category\IndexController::class)->name('category.index');
+// endregion
