@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\postJson;
@@ -50,4 +51,22 @@ describe('validation rules', function () {
                 'name' => __('validation.string', ['attribute' => 'name'])
             ]);
     });
+});
+it('after creating whe should return a status 201 with the created category', function () {
+
+    $request = postJson(route('category.store'),[
+        'name' => 'Test 1'
+    ])->assertSuccessful();
+
+    /** @var Category $category */
+    $category = Category::query()->latest()->first();
+
+    $request->assertJson([
+        'data' => [
+            'id'         => $category->id,
+            'category'   => $category->name,
+            'created_at' => $category->created_at->format('Y-m-d h:i:s'),
+            'updated_at' => $category->updated_at->format('Y-m-d h:i:s'),
+        ],
+    ]);
 });
