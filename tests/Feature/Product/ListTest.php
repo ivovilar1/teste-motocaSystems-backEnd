@@ -23,3 +23,23 @@ it('should be able to list all products', function () {
         'updated_at' => $product->updated_at->format('Y-m-d h:i:s'),
     ]);
 });
+
+it('should be able to list specific product', function () {
+    $product = Product::factory()->create();
+    $request = getJson(route('product.edit', $product))
+        ->assertOk();
+
+    $request->assertJsonFragment([
+        'id' => $product->id,
+        'name' => $product->name,
+        'description' => $product->description,
+        'price' => $product->price,
+        'category' => [
+            'id' => $product->category->id,
+            'name' => $product->category->name
+        ],
+        'created_at' => $product->created_at->format('Y-m-d h:i:s'),
+        'updated_at' => $product->updated_at->format('Y-m-d h:i:s'),
+    ]);
+
+});
