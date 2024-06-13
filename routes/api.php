@@ -11,4 +11,5 @@ Route::get('/user', function (Request $request) {
 // region Category
 Route::post('category', Category\StoreController::class)->name('category.store');
 Route::get('category', Category\IndexController::class)->name('category.index');
+Route::get('category/{category}', Category\EditController::class)->name('category.edit');
 // endregion

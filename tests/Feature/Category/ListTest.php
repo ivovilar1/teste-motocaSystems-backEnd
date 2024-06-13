@@ -16,3 +16,17 @@ it('should be able to list categories', function () {
         'updated_at' => $category->updated_at->format('Y-m-d h:i:s'),
     ]);
 });
+
+it('should be able to list specific category', function () {
+    $category = Category::factory()->create();
+
+    $request = getJson(route('category.edit', $category->id))
+        ->assertOk();
+
+    $request->assertJsonFragment([
+        'id'         => $category->id,
+        'category'   => $category->name,
+        'created_at' => $category->created_at->format('Y-m-d h:i:s'),
+        'updated_at' => $category->updated_at->format('Y-m-d h:i:s'),
+    ]);
+});
