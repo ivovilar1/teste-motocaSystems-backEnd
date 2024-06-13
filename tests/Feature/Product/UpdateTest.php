@@ -123,3 +123,27 @@ describe('validation rules', function () {
             ]);
     });
 });
+
+it('after update whe should return a status 201 with the updated product', function () {
+
+    $response = putJson(route('product.update', $this->product), [
+        'name' => 'Product Name Updated',
+        'description' => $this->product->description,
+        'price' => '140.41',
+        'category_id' => $this->product->category_id,
+    ])->assertOk();
+
+    $response->assertJson([
+        'data' => [
+            'name' => 'Product Name Updated',
+            'description' => $this->product->description,
+            'price' => '14041',
+            'category' => [
+                'id' => $this->product->category->id,
+                'name' => $this->product->category->name
+            ],
+            'created_at' => $this->product->created_at->format('Y-m-d h:i:s'),
+            'updated_at' => $this->product->updated_at->format('Y-m-d h:i:s'),
+        ],
+    ]);
+});
