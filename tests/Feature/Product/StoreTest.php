@@ -28,8 +28,8 @@ it('should be able to create a product', function () {
     assertDatabaseHas('products', [
         'name' => 'Product Test',
         'description' => 'Product Test Description',
-        'price' => '12345',
-        'category_id' => 1
+        'price' => 12345,
+        'category_id' => $this->category->id
     ]);
 });
 
