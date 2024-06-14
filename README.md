@@ -5,11 +5,12 @@
 - https://www.postman.com/ivovilar1/workspace/teste-backend-motoca/collection/21873994-7038fd5d-7c89-4150-abe0-2379d8d1c950?action=share&creator=21873994
 
 ## Para rodar o projeto localmente siga os seguintes passos:
+-------------------------------------------------------------
 ## Observação:
--Certifique-se de que tenha o php instalado na versão 8.2 superior
--Certique-se de que tenha o composer instalado
--Certifique-se de que tenha o postgresql instalado
-
+1-Certifique-se de que tenha o php instalado na versão 8.2 superior
+2- Certique-se de que tenha o composer instalado
+3- Certifique-se de que tenha o postgresql instalado
+-------------------------------------------------------------
  1- Clone este repositorio
  2- Execute o comando para instalar as dependencias do projeto:
  ```sh
